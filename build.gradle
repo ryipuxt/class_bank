@@ -25,16 +25,15 @@ repositories {
 }
 
 dependencies {
-	// 의존성 추가
+	// 의존성 추가 
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.0'
-	
-	// TODO - tools xml 파일 error check 
+	// TODO - check  
 	providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
-	
 	
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+	
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
@@ -48,11 +47,4 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-war {
-    webXml = file('src/main/webapp/WEB-INF/web.xml')
-    doLast {
-        file('src/main/webapp/WEB-INF/web.xml').delete()
-    }
 }

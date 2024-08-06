@@ -22,6 +22,6 @@ public class Test1Controller {
 		} catch (Exception e) {
 			throw new UnAuthorizedException("인증이 안된 사용자입니다.", HttpStatus.UNAUTHORIZED);
 		}
-		return User.builder().username("길동").passowrd("asd123").build();
+		return User.builder().username("길동").password("asd123").build();
 	}
 }
