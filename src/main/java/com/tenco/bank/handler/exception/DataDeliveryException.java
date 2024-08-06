@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import lombok.Getter;
 
 @Getter
-public class UnAuthorizedException extends RuntimeException {
+public class DataDeliveryException extends RuntimeException {
 
 	/**
 	 * 
@@ -13,8 +13,7 @@ public class UnAuthorizedException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	private HttpStatus status;
 
-	// throw Exception
-	public UnAuthorizedException(String message, HttpStatus status) {
+	public DataDeliveryException(String message, HttpStatus status) {
 		super(message);
 		this.status = status;
 	}

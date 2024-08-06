@@ -18,6 +18,7 @@ public class Test1Controller {
 		// Gson > JSON 형식으로 변환 > String 응답처리
 		try {
 			int result = 10 / 0;
+			System.out.println(result);
 		} catch (Exception e) {
 			throw new UnAuthorizedException("인증이 안된 사용자입니다.", HttpStatus.UNAUTHORIZED);
 		}
