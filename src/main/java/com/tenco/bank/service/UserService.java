@@ -14,17 +14,17 @@ import com.tenco.bank.repository.interfaces.UserRepository;
 public class UserService {
 
 	// DI - 의존 주입
-	@Autowired
+	// @Autowired
 	private UserRepository userRepository;
 
-//  @Autowired 어노테이션으로 대체 가능
-//	public UserService(UserRepository userRepository) {
-//		this.userRepository = userRepository;
-//	}
+	@Autowired
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	/**
-	 * 회원 등록 서비스 기능
-	 * 트랜잭션 처리
+	 * 회원 등록 서비스 기능 트랜잭션 처리
+	 * 
 	 * @param dto
 	 */
 	@Transactional // 트랜잭션 처리는 반드시 습관화
