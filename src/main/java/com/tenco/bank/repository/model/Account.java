@@ -15,8 +15,8 @@ import lombok.ToString;
 @ToString
 public class Account {
 	private Integer id;
-	private String username;
-	private String passowrd;
+	private String number;
+	private String password;
 	private Long balance;
 	private Integer userId;
 	private Timestamp createdAt;
