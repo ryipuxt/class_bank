@@ -1,5 +1,6 @@
 package com.tenco.bank.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.tenco.bank.repository.interfaces.AccountRepository;
 import com.tenco.bank.repository.interfaces.HistoryRepository;
 import com.tenco.bank.repository.model.Account;
 import com.tenco.bank.repository.model.History;
+import com.tenco.bank.repository.model.HistoryAccount;
 import com.tenco.bank.utils.Define;
 
 @Service
@@ -152,15 +154,14 @@ public class AccountService {
 	// 7. 입금 계좌 -- update 처리
 	// 8. 출금 계좌 객체 상태값 변경 처리 (잔액 - 거래금액)
 	// 9. 출금 계좌 -- update 처리
-	// 10. 거래 내역 등록 처리
+	// 10. 거래 내역 등록 처리java long range
 	// 11. 트랜잭션 처리
 	@Transactional
 	public void updateAccountTransfer(TransferDTO dto, Integer principalId) {
 
 		Account wAccountEntity = accountRepository.findByNumber(dto.getWAccountNumber());
 		Account dAccountEntity = accountRepository.findByNumber(dto.getDAccountNumber());
-		System.err.println(wAccountEntity);
-		System.err.println(dAccountEntity);
+
 		if (wAccountEntity == null || dAccountEntity == null) {
 			throw new DataDeliveryException(Define.NOT_EXIST_ACCOUNT, HttpStatus.BAD_REQUEST);
 		}
@@ -176,7 +177,6 @@ public class AccountService {
 		History history = History.builder().amount(dto.getAmount()).wBalance(wAccountEntity.getBalance())
 				.dBalance(dAccountEntity.getBalance()).wAccountId(wAccountEntity.getId())
 				.dAccountId(dAccountEntity.getId()).build();
-		System.err.println(history);
 
 		int rowResultCount = historyRepository.insert(history);
 		if (rowResultCount != 1) {
@@ -184,4 +184,32 @@ public class AccountService {
 		}
 
 	}
+
+	/**
+	 * 단일 계좌 조회 기능
+	 * @param accountId (px)
+	 * @return
+	 */
+	public Account readAccountById(Integer accountId) {
+		Account accountEntity = accountRepository.findByAccountId(accountId);
+		if (accountEntity == null) {
+			throw new DataDeliveryException(Define.NOT_EXIST_ACCOUNT, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return accountEntity;
+	}
+
+	/**
+	 * 단일 계좌 거래 내역 조회
+	 * @param type = [all, deposit, withdrawal]
+	 * @param accountId (pk)
+	 * @return 전체, 입금, 출금 거래 내역(3가지 타입)
+	 */
+	// @Transactional
+	public List<HistoryAccount> readHistoryByAccountId(String type, Integer accountId) {
+		List<HistoryAccount> list = new ArrayList<>();
+		list = historyRepository.findByAccountIdAndTypeOfHistory(type, accountId);
+
+		return list;
+	}
+
 }

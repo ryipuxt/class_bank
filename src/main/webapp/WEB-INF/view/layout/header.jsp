@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +55,7 @@
 						<ul class="nav nav-pills flex-column">
 							<li class="nav-item"><a class="nav-link" href="/account/list">나의 계좌 목록</a></li>
 							<li class="nav-item"><a class="nav-link" href="/account/save">신규 계좌 생성</a></li>
-							<li class="nav-item"><a class="nav-link" href="/account/withdraw">출금하기</a></li>
+							<li class="nav-item"><a class="nav-link" href="/account/withdrawal">출금하기</a></li>
 							<li class="nav-item"><a class="nav-link" href="/account/deposit">입금하기</a></li>
 							<li class="nav-item"><a class="nav-link" href="/account/transfer">이체하기</a></li>
 						</ul>
