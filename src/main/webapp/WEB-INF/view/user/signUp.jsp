@@ -8,7 +8,7 @@
 	<h2>회원 가입</h2>
 	<h5>Bank App에 오신걸 환영합니다.</h5>
 
-	<form action="/user/sign-up" method="post">
+	<form action="/user/sign-up" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="username">username:</label>
 			<input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
@@ -21,7 +21,16 @@
 			<label for="fullname">fullname:</label>
 			<input type="text" class="form-control" placeholder="Enter fullname" id="fullname" name="fullname">
 		</div>
-		<button type="submit" class="btn btn-primary">회원가입</button>
+		<div class="custom-file">
+    		<input type="file" class="custom-file-input" id="customFile" name="mFile">
+			<label class="custom-file-label" for="customFile">Choose file</label>
+		</div>
+		<div class="d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary">회원가입</button>
+		</div>
+		<div class="d-flex justify-content-end">
+			<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=4363948ca9c2f4bf9d953f2b71f19d48&redirect_uri=http://localhost:8080/user/kakao"><img alt="소셜로그인이미지" src="/images/kakao_login_small.png"></a>
+		</div>
 	</form>
 
 </div>
@@ -29,6 +38,15 @@
 </div>
 </div>
 <!-- end of content.jsp(xxx.jsp) -->
+
+<script>
+// Add the following code if you want the name of the file appear on select
+$(".custom-file-input").on("change", function() {
+	console.log($(this).val());
+  let fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
 
 <!-- footer.jsp -->
 <%@include file="/WEB-INF/view/layout/footer.jsp"%>

@@ -22,8 +22,10 @@ public interface UserRepository {
 	public User findById(Integer id);
 
 	public List<User> findAll();
-	
+
 	// 로그인 기능 x (username, password) --> return user
-	public User findByUsernameAndPassword(@Param("username") String username,@Param("password") String password);
+	public User findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+
+	public User findByUsername(@Param("username") String username);
 
 }
